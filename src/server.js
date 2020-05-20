@@ -3,6 +3,9 @@ const    cors = require('cors');
 
 const app = express();
 
+app.use(express.static('../public'));
+
+
 app.use(cors({
               credentials:true,
               origin: 'http://localhost:3000',
@@ -11,41 +14,47 @@ app.use(cors({
 
 ))
 
+const BASE_URL = 'http://localhost:8888/';
+const IMAGES_URL = BASE_URL+'images/';
+
+process.env.BABEL_ENV = 'http://localhost:8888/'; //constantes globales para acceder desde cualquier lugar del backend.
+process.env.IMAGES_URL =process.env.BABEL_ENV+'images/'; //constantes globales para acceder desde cualquier lugar del backend.
+
 const destinos = [
     {
         id:1,
         nombre:"Ezeiza",
-        imagen:"https://www.buenosaires.gob.ar/sites/gcaba/files/styles/interna_pagina/public/_mg_0477.jpg",
+        imagen:process.env.IMAGES_URL + "ezeiza.jpg",
         precio:"$100"
     },
     {
         id:2,
         nombre:"Adrogue",
-        imagen:"https://i0.wp.com/laurbedigital.com.ar/noticias/wp-content/uploads/2017/12/20171221-brown1.jpg",
+        imagen:process.env.IMAGES_URL + "adrogue.jpg",
         precio:"$120"
     },
     {
         id:3,
         nombre:"Lanus",
-        imagen:"https://i0.wp.com/laurbedigital.com.ar/noticias/wp-content/uploads/2017/12/20171221-brown1.jpg",
+        imagen:process.env.IMAGES_URL + "lanus.jpg",
         precio:"$130"
     },
     {
         id:4,
-        nombre:"Grand Bour",
-        imagen:"https://i0.wp.com/laurbedigital.com.ar/noticias/wp-content/uploads/2017/12/20171221-brown1.jpg",
+        nombre:"Grand Bourg",
+        imagen:process.env.IMAGES_URL + "grandBourg.jpeg",
         precio:"$140"
     },
     {
         id:5,
         nombre:"Pilar",
-        imagen:"https://i0.wp.com/laurbedigital.com.ar/noticias/wp-content/uploads/2017/12/20171221-brown1.jpg",
+        imagen:process.env.IMAGES_URL + "pilar.jpeg",
         precio:"$150"
     },
     {
         id:6,
         nombre:"Adrogue SUR",
-        imagen:"https://i0.wp.com/laurbedigital.com.ar/noticias/wp-content/uploads/2017/12/20171221-brown1.jpg",
+        imagen:process.env.IMAGES_URL + "adrogue.jpg",
         precio:"$160"
     }
 ]
