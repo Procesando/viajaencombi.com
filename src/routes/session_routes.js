@@ -1,12 +1,17 @@
 const express = require('express');
 const router = express.Router();
 
+
+//INICIAR SESION
 router.post('/',(req,res)=>{
 
     console.log(req.body);
 
 
     if (req.body.user ==='pepe' && req.body.password === '123456'){
+
+        res.session.user = 'pepe';  // si session.user está creado, quiere decir que está loggeado porque pasó por acá. 
+
         res.json(
             {
                 status : 'ok',
@@ -25,6 +30,25 @@ router.post('/',(req,res)=>{
             }
         )
     }
+})
+
+
+//CERRAR SESION
+router.delete('/', (req,res)=>{
+    req.session.destroy (err => {
+        if(err){
+            res.json({
+                status:'error',
+                message:'error al cerrar la sesión'
+            })
+        }else{
+            res.clearCookie('viajaencombi');
+            res.json({
+                status:'ok',
+                message:'sesión cerrada'
+            })
+        }
+    })
 })
 
 module.exports = router; 

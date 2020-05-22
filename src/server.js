@@ -17,6 +17,8 @@ app.use(bodyParser.json());
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 
+const auth = require('./auth'); //middelwhere de autorización.
+
 app.use(express.static('../public'));
 
 
