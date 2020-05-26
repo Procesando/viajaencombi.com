@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
+const conexion = require('../connection');
 
 
 
@@ -13,7 +13,7 @@ const destinos = [
     },
     {
         id:2,
-        nombre:"Adrogue",
+        nombre:"Adrogue", 
         imagen:process.env.IMAGES_URL + "adrogue.jpg",
         precio:"$120"
     },
@@ -42,10 +42,25 @@ const destinos = [
         precio:"$160"
     }
 ]
-
+/*
 router.get('/',(req,res) =>{
     res.json(destinos);
+});  Ruta harcodeada*/
+
+//nueva ruta de conexión a la base:
+router.get('/',(req,res) =>{
+    
+    let sql = `SELECT dest_id AS id , dest_nombre AS nombre, dest_imagen AS imagen, dest_precio AS precio
+               FROM destinos`;
+
+    conexion.query(sql, function (err,result,fields){
+        if(err) throw err;
+
+        res.json(result);
+    })
+
 });
+
 
 router.get('/:id',(req,res) =>{
     let destinoId = destinos.filter(
