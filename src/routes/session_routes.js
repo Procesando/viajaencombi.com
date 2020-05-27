@@ -6,9 +6,9 @@ const router = express.Router();
 router.post('/',(req,res)=>{
 
 
-    if (req.body.user ==='pepe' && req.body.password === '123456'){
+    if (req.body.user ==='admin' && req.body.password === '123456'){
 
-        req.session.user = 'pepe';  // si session.user está creado, quiere decir que está loggeado porque pasó por acá. 
+        req.session.user = 'admin';  // si session.user está creado, quiere decir que está loggeado porque pasó por acá. 
 
         res.json(
             {
