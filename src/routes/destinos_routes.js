@@ -42,10 +42,11 @@ const destinos = [
         precio:"$160"
     }
 ]
-/*
-router.get('/',(req,res) =>{
+
+//Ruta harcodeada
+/*router.get('/',(req,res) =>{
     res.json(destinos);
-});  Ruta harcodeada*/
+}); */
 
 //nueva ruta de conexión a la base:
 router.get('/',(req,res) =>{
@@ -54,6 +55,22 @@ router.get('/',(req,res) =>{
                FROM destinos`;
 
     conexion.query(sql, function (err,result,fields){
+        if(err) throw err;
+
+        res.json(result);
+    })
+
+});
+
+//barra de busqueda
+router.get('/search/:terminoBuscado',(req,res) =>{
+    
+    let sqlSearch = `SELECT dest_id AS id , dest_nombre AS nombre, dest_imagen AS imagen, dest_precio AS precio
+               FROM destinos
+               WHERE dest_nombre LIKE ?`;
+
+    let value = [`%${req.params.terminoBuscado}%`]
+    conexion.query(sqlSearch, function (err,result,fields){
         if(err) throw err;
 
         res.json(result);

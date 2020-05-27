@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');  //permite tomar los datos del body d
 
 const destinosRoutes = require('./routes/destinos_routes');
 const sessionRoutes = require('./routes/session_routes');
+const misDestinosRoutes = require('./routes/misdestinos_routes');
 
 const app = express();
 
@@ -42,6 +43,7 @@ app.use(session({
 
 app.use('/auth', sessionRoutes);
 app.use('/destinos', destinosRoutes);
+app.use('/favoritos', misDestinosRoutes);
 
 
 app.listen(8888, ()=>{console.log("Backend escuchando")})

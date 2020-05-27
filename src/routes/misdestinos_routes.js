@@ -17,4 +17,29 @@ router.get('./:user' , (req,res)=>{
     })
 })
 
+router.post('/', (req,res)=>{
+    let sqlInsert = `INSERT INTO misdestinos
+                        VALUES (?,?)`;
+    let values = [req.body.usrId , req.body.pubId];
+
+    conexion.query(sqlInsert ,values ,  (err , response , fields)=>{
+        if (err){
+            res.json(
+                {
+                    status : 'error',
+                    message : 'Error al agregar a favoritos'
+                }
+            )
+        }else {
+            res.json(
+                {
+                    status :'ok',
+                    message : 'Agregado a favoritos'
+                }
+            )
+        }
+    })
+})
+
+
 module.exports = router;
